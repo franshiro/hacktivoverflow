@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
@@ -25,7 +25,7 @@
         <div class="modal-footer">
           <div>
               <div id="my-signin2" data-dismiss="modal"></div>
-          </div><br>
+          </div>
           <div>
             <button type="button" class="btn btn-primary" @click="login" data-dismiss="modal">Login</button>
           </div>
