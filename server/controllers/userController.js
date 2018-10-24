@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 require('dotenv').config()
 const axios = require('axios')
 const sgMail = require('@sendgrid/mail');
+const sendEmail = require('../helper/cron')
 
 const CLIENT_ID = process.env.CLIENT_ID
 const {OAuth2Client} = require('google-auth-library');
@@ -39,7 +40,7 @@ class UserController{
                         User.create({
                             username : data.name,
                             email : data.email,
-                            password : data.sub
+                            password : data.sub + 'dkgakoenaoga'
                         })
                         .then(newuser => {
                             let token = jwt.sign({
@@ -51,6 +52,7 @@ class UserController{
                             res.status(200).json({token,username : newuser.username})
                         })
                         .catch(err => {
+                            console.log(err)
                             res.status(500).json(err)
                         })
                     }
@@ -82,19 +84,23 @@ class UserController{
             to: user.email,
             from: 'franshiro@gmail.com',
             subject: 'Registration Success',
-            text: `Your Registration now is success, 
-                    here your data :
-                    username : ${user.username}
-                    email : ${user.email}
-                    password : ${req.body.password}
-
+            text: `thansk for your Registration
+                    `,
+            html: `
+                    Your Registration now is success, <br/>
+                    here your data :<br/>
+                    <strong>username :</string> ${user.username}<br/>
+                    <strong>email :</strong> ${user.email}<br/>
+                    <strong>password :</strong> ${req.body.password}<br/>
+                    <br/>
+                    <br/>
                     please keep your password secretly,
                     don't share your informastion to others
-                    `,
-            html: '<strong>Get Your Solutions Here</strong>',
+                    <br/>
+                    <strong>Get Your Solutions Here</strong>`,
             };
             sgMail.send(msg);
-
+            sendEmail(user.email)
             res.status(201).json({
                 user,
                 success : true, 
@@ -102,6 +108,7 @@ class UserController{
             })
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json({err})
         })
     }

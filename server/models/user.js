@@ -6,7 +6,7 @@ const validate = require('mongoose-validator')
 const isValidPass = [
     validate({
         validator: 'isLength',
-        arguments:[8,20],
+        arguments:[8,500],
         message : 'Password must be more than 8 character'
     })
 ]

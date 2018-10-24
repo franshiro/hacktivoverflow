@@ -8,7 +8,7 @@
           <!-- Search Widget -->
           <searchWidget @searchArticle="searchArticle"></searchWidget>
           <!-- Categories Widget -->
-          <categories></categories>
+          <!-- <categories></categories> -->
           <!-- Side Widget -->
           <list></list>
           <!-- Side Widget -->
@@ -23,14 +23,14 @@
 import chat from '@/components/chat.vue'
 import articlelist from '@/components/articlelist.vue'
 import searchWidget from '@/components/searchWidget.vue'
-import categories from '@/components/categories.vue'
+// import categories from '@/components/categories.vue'
 import list from '@/components/list.vue'
 export default {
   props : ['article'],
   components : {
     articlelist,
     searchWidget,
-    categories,
+    // categories,
     list,
     chat
   },
