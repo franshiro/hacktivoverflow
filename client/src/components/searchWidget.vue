@@ -19,11 +19,20 @@ export default {
             search : ''
         }
     },
+    // watch: {
+    //     search() {
+    //         this.doSearch()
+    //     },
+    // },
     methods: {
+        // ...mapActions('searchArticle'),
         sendSearch() {
             console.log(this.search, 'ini dari comp searchWidget')
             this.$emit('searchArticle', this.search)
         },
+        // doSearch(){
+        //     this.searchArticle(this.search)
+        // }
     },
 }
 </script>
