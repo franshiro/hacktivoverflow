@@ -53,7 +53,7 @@ export default {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
       axios({
         method : 'POST',
-        url : `${config.port}/users/login/google`,
+        url : `https://serverflow.fransiena.id/users/login/google`,
         data : {
           googleToken : googleUser.Zi.id_token
         }

@@ -24,11 +24,27 @@
               <label for="inputUsername">Name</label>
               <input type="text" class="form-control" id="inputUsername" v-model="username"  placeholder="Username">
             </div>
+            <div class="btn btn-danger" v-if="errMessage">
+              <div class="btn btn-danger">
+                <label>Invalid Email or Username</label>
+              </div>
+              <br/>
+              <div class="btn btn-danger">
+                <label>Password must be greather than 7</label>
+              </div>
+            </div>
+             <div v-if="successLogin">
+              <div class="btn btn-success" data-dismiss='modal' data-toggle='modal' data-target='#modalLogin'>
+                <label>Register Success</label>
+                <br>
+                <label>Goto Login</label>
+              </div>
+            </div>
             
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary"  data-dismiss="modal" @click="register">Register</button>
+          <button type="button" class="btn btn-primary" @click="register">Register</button>
         </div>
       </div>
     </div>
@@ -42,7 +58,9 @@ export default {
     return {
       email:'',
       password:'',
-      username: ''
+      username: '',
+      errMessage : false,
+      successLogin : false
     }
   },
   methods : {
@@ -61,9 +79,15 @@ export default {
         this.email = '',
         this.password = '',
         this.username = ''
+        this.successLogin = true
+        this.errMessage = false
       })
       .catch(err => {
-        console.log(err)
+        this.email = '',
+        this.password = '',
+        this.username = '',
+        this.successLogin = false
+        this.errMessage = true
       })
     }
   }
