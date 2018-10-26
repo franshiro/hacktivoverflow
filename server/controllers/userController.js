@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 require('dotenv').config()
 const axios = require('axios')
 const sgMail = require('@sendgrid/mail');
-const sendEmail = require('../helper/cron')
+const {sendEmail} = require('../helper/cron')
 
 const CLIENT_ID = process.env.CLIENT_ID
 const {OAuth2Client} = require('google-auth-library');
@@ -73,44 +73,45 @@ class UserController{
           })
     }
     static register(req, res){
-        User.create({
-            username : req.body.username,
-            email : req.body.email,
-            password : req.body.password            
-        })
-        .then(user => {
-            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-            const msg = {
-            to: user.email,
-            from: 'franshiro@gmail.com',
-            subject: 'Registration Success',
-            text: `thansk for your Registration
-                    `,
-            html: `
-                    Your Registration now is success, <br/>
-                    here your data :<br/>
-                    <strong>username :</string> ${user.username}<br/>
-                    <strong>email :</strong> ${user.email}<br/>
-                    <strong>password :</strong> ${req.body.password}<br/>
-                    <br/>
-                    <br/>
-                    please keep your password secretly,
-                    don't share your informastion to others
-                    <br/>
-                    <strong>Get Your Solutions Here</strong>`,
-            };
-            sgMail.send(msg);
-            sendEmail(user.email)
-            res.status(201).json({
-                user,
-                success : true, 
-                message : "Register success"
-            })
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({err})
-        })
+        sendEmail(req.body.email, req.body.password)
+        // User.create({
+        //     username : req.body.username,
+        //     email : req.body.email,
+        //     password : req.body.password            
+        // })
+        // .then(user => {
+        //     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        //     const msg = {
+        //     to: user.email,
+        //     from: 'franshiro@gmail.com',
+        //     subject: 'Registration Success',
+        //     text: `thansk for your Registration
+        //             `,
+        //     html: `
+        //             Your Registration now is success, <br/>
+        //             here your data :<br/>
+        //             <strong>username :</string> ${user.username}<br/>
+        //             <strong>email :</strong> ${user.email}<br/>
+        //             <strong>password :</strong> ${req.body.password}<br/>
+        //             <br/>
+        //             <br/>
+        //             please keep your password secretly,
+        //             don't share your informastion to others
+        //             <br/>
+        //             <strong>Get Your Solutions Here</strong>`,
+        //     };
+        //     sgMail.send(msg);
+        //     sendEmail(user.email, user._id)
+        //     res.status(201).json({
+        //         user,
+        //         success : true, 
+        //         message : "Register success"
+        //     })
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     res.status(500).json({err})
+        // })
     }
 
     static registerAdmin(req, res){
@@ -190,7 +191,10 @@ class UserController{
     static showAllUser(req, res){
         User.find({})
         .then(users => {
-            res.status(200).json(users)
+            res.status(200).json({
+                users : users,
+                message : 'Get All User'
+            })
         })
         .catch(err => {
             res.status(500).json(err)

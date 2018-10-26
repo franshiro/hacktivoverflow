@@ -23,7 +23,7 @@ let token;
 let id;
 
 // create article
-describe('User Get Profile Data API Test', function() {
+describe('User Get Article Data API Test', function() {
     after(function(done) {
         Article.deleteOne({title: 'test'})
             .then(function(result) {
