@@ -3,7 +3,7 @@
         <h5 class="card-header">List</h5>
         <div class="card-body container">
             <div class="d-flex justify-content-center" v-for="(value, index) in listArticle" :key="index">
-                <div id="div-link" @click="detailArticle(value._id)">{{value.title}}</div>
+                <div id="div-link" @click="detailArticle(value._id)">#{{value.title}}</div>
             </div>
         </div>
     </div>
@@ -53,5 +53,8 @@ export default {
     } */
     #div-link {
         cursor: pointer;
+    }
+    #div-link:hover{
+        color: blue;
     }
 </style>

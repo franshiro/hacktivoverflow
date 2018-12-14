@@ -11,7 +11,8 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 app.use(cors())
-mongoose.connect('mongodb://localhost/blog', {useNewUrlParser : true})
+mongoose.set('useCreateIndex', true)
+mongoose.connect('mongodb://localhost/hackoverflow', {useNewUrlParser : true})
 // var mongodbUri ='mongodb://@ds151078.mlab.com:51078/hacktivoverflow';
 // mongoose.connect(mongodbUri, {
 //   useNewUrlParser: true,

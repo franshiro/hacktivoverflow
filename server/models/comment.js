@@ -8,6 +8,8 @@ const commentSchema = new Schema({
         ref : 'User'
     }],
     user : String
+},{
+    timestamps : true
 })
 
 const Comment  = mongoose.model('Comment', commentSchema)

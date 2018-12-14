@@ -9,12 +9,16 @@
         <p class="card-text" v-html="detail.article"></p>
     </div>
     <div id="totalVote" class="d-flex bd-highlight mb-3">
-      <div class="mr-auto border">
-        <p class="totalVote">Total Vote : {{totalVote}}</p>
+      <div class="mr-auto">
+        <p class="totalVote"><strong>Total Vote : {{totalVote}}</strong></p>
       </div>
       <div v-if="username != detail.username && username != ''">
-        <button @click="downVote" class="p-2">DownVote</button>
-        <button @click="upVote" class="p-2">UpVote</button>
+          <button @click="downVote" class="button-vote p-2">
+            <span class="fas fa-thumbs-down"></span>
+          </button>
+          <button @click="upVote" class="button-vote p-2">
+            <span class="fas fa-thumbs-up"></span>
+          </button>
       </div>
     </div>
     <div class="card-footer text-muted">
@@ -32,24 +36,34 @@
                 <ul class="comments-list" v-for="(list,index) in detail.comments" :key="index">
                     <li class="comment border">
                         <div id="totalVote" class="d-flex bd-highlight mb-3">
-                          <div class="mr-auto border">
-                            <p class="totalVote">Total Vote : {{list.vote.length}}</p>
+                          <div class="mr-auto">
+                            <p class="totalVote">
+                              Posted by, <strong>{{list.user}}</strong>&nbsp;
+                              {{list.createdAt | moment("from", "now", true)}} ago,
+                                <span class="fas fa-thumbs-up"> : {{list.vote.length}}</span>
+                                
+                            </p>
                           </div>
                           <div v-if="username != list.user && username != ''">
-                            <button @click="commentDownVote(list._id)" class="p-2">DownVote</button>
-                            <button @click="commentUpVote(list._id)" class="p-2">UpVote</button>
+                            <button @click="commentDownVote(list._id)" class="button-vote p-2">
+                              <span class="fas fa-thumbs-down"></span>
+                            </button>
+                            <button @click="commentUpVote(list._id)" class="button-vote p-2">
+                              <span class="fas fa-thumbs-up"></span>
+                            </button>
                           </div>
+                          <button 
+                            v-if="username == list.user && username != ''" 
+                            @click="sendId(list._id)" 
+                            class="button-vote ml-auto" 
+                            data-toggle='modal' 
+                            data-target='#editComment'
+                            title="Edit Comment">
+                              <span class="fas fa-edit"></span>
+                            </button>
                         </div>
                         <div class="comment-body">
-                            <div class="comment-heading">
-                                <h4 class="user">{{list.user}}</h4>
-                            </div>
                             <p v-html="list.comment"></p>
-                        </div>
-                        <div class="d-flex">
-                          <div v-if="username != list.user && username != ''">
-                          </div>
-                            <button v-if="username == list.user && username != ''" @click="sendId(list._id)" class="ml-auto" data-toggle='modal' data-target='#editComment'>Edit</button>
                         </div>
                     </li>
                 </ul>
@@ -209,6 +223,12 @@ export default {
   }
   .totalVote{
     padding: 5px;
+  }
+  .user{
+    color : blue;
+  }
+  .comment-body{
+    padding-bottom: 10px;
   }
 </style>
 

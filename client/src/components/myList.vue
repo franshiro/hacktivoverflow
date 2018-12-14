@@ -1,17 +1,16 @@
 <template>
-    <div class="col-md-12">
-      <div class="container py-3 border" v-for="(value) in myArticle" :key="value._id">
-         <div id="div-link" class="card-body" @click="detailArticle(value._id)">
-          {{value.title}}
-          <p class="card-text">Posted on {{value.createAt}}</p>
-          <p class="card-text">by {{value.username}}</p>
+    <div class="card mt-4">
+      <div class="container border" v-for="(value) in myArticle" :key="value._id">
+         <div class="my-article" @click="detailArticle(value._id)">
+          <h3><strong>{{value.title}}</strong></h3>
+          <p class="card-text">Posted by <strong style="color:blue">{{value.username}}</strong>, {{value.createdAt | moment("from", "now", true)}} ago</p>
         </div>
         <div class="py-3" v-if="username == value.username && username != ''">
-          <button type="button" class="btn btn-secondary my-2 my-sm-0" @click="test(value._id)" data-toggle="modal" data-target="#modalEdit">Edit</button>
-          <button class="btn btn-secondary" @click="deleteArticle(value._id)">Delete</button>
+          <button type="button" class="btn btn-secondary my-2 my-sm-0" @click="getId(value._id)" data-toggle="modal" data-target="#modalEdit">Edit</button>
+          <button class="btn btn-secondary" @click="deleteArticle(value._id)" title="delete">Delete</button>
         </div>
     </div>
-    <modalEdit :id="idArticle" :getmylist="getMyList"></modalEdit>
+    <modalEdit :id="idArticle" :getmylist="getMyList" :updatecomponent="updatecomponent"></modalEdit>
   </div>
 </template>
 
@@ -58,7 +57,7 @@ export default {
     }
   },
   methods: {
-    test(value){
+    getId(value){
       this.idArticle = value
     },
     deleteArticle : function(value){
@@ -121,6 +120,8 @@ export default {
 
 <style scoped>
   .container{
-    margin-top: 20px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 98%;
   }
 </style>

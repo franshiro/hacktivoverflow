@@ -149,4 +149,12 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+.button-vote{
+  border-radius: 5px;
+  margin : 2.5px
+}
+.button-vote:hover{
+  border : 1px solid blue;
+  color : blue;
+}
 </style>

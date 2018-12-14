@@ -83,6 +83,7 @@ export default {
         this.errMessage = false
       })
       .catch(err => {
+        console.log(err)
         this.email = '',
         this.password = '',
         this.username = '',

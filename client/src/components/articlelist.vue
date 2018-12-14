@@ -1,12 +1,11 @@
 <template>
-  <div class="col-md-8">
-    <div class="container py-3" v-for="(value, index) in article" :key="index">
-      <div id="div-link" class="card-body container border" @click="detailArticle(value._id)">
+  <div class="card mt-4">
+    <div class="container" v-for="(value, index) in article" :key="index">
+      <div class="detail" @click="detailArticle(value._id)">
         <div>
-          {{value.title}}
+        <p class="card-text">Posted by <strong style="color:blue">{{value.username}}</strong>, {{value.createdAt | moment("from", "now", true)}} ago</p>
         </div>
-        <p class="card-text">Posted on {{value.createAt}}</p>
-        <p class="card-text">by {{value.username}}</p>
+          <h3><strong>{{value.title}}</strong></h3>
       </div>
     </div>
   </div>
@@ -33,14 +32,24 @@ export default {
 }
 </script>
 
-<style>
-.card{
-  width: 95%!important;
-}
-.col-md-4{
-  width: 100%!important
-}
-#div-link {
-        cursor: pointer;
-    }
+<style scoped>
+  .card{
+    width: 100%!important;
+  }
+  .container{
+    width: 100%;
+  }
+  .detail{
+    margin : 1%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom : 10px;
+    cursor: pointer;
+  }
+  .detail:hover{
+    border: 1px solid blue;
+    color : blue;
+  }
+
 </style>

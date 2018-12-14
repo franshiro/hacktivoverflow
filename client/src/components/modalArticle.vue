@@ -17,7 +17,6 @@
               </div>
               <div class="form-group col-md-12">
                 <label for="inputContent">Content</label>
-                <!-- <textarea class="form-control" rows="8" v-model="content"></textarea> -->
                 <wysiwyg v-model="content" />
               </div>
             </div>
@@ -40,7 +39,6 @@ export default {
       title : '',
       content : '',
       category : '',
-      img : ''
     }
   },
   methods : {
@@ -60,7 +58,9 @@ export default {
         }
       })
       .then(response => {
-        console.log(response)
+        this.content = ''
+        this.title = ''
+        this.category = ''
         this.getarticle()
         this.updatecomponent()
       })

@@ -1,38 +1,32 @@
 <template>
     <div class="container">
       <div class="row">
-        <!-- Blog Entries Column -->
-        <articlelist :article="article"></articlelist>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-          <!-- Search Widget -->
-          <searchWidget @searchArticle="searchArticle"></searchWidget>
-          <!-- Categories Widget -->
-          <!-- <categories></categories> -->
-          <!-- Side Widget -->
+        <div class="col-sm-6 col-md-6 col-lg-8">
+          <div class="content">
+            <searchWidget @searchArticle="searchArticle"></searchWidget>
+            <articlelist :article="article"></articlelist>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-4">
           <list></list>
-          <!-- Side Widget -->
-          <chat></chat>
+          <banner></banner>
         </div>
       </div>
-      <!-- /.row -->
     </div>
 </template>
 
 <script>
-import chat from '@/components/chat.vue'
+import banner from '@/components/banner.vue'
 import articlelist from '@/components/articlelist.vue'
 import searchWidget from '@/components/searchWidget.vue'
-// import categories from '@/components/categories.vue'
 import list from '@/components/list.vue'
 export default {
   props : ['article'],
   components : {
     articlelist,
     searchWidget,
-    // categories,
     list,
-    chat
+    banner
   },
   methods: {
     searchArticle(value) {
@@ -43,6 +37,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .content{
+    margin-top: 22px;
+    width: 100%;
+  }
 </style>

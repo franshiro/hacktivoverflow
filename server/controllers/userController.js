@@ -73,7 +73,6 @@ class UserController{
           })
     }
     static register(req, res){
-        sendEmail(req.body.email, req.body.password)
         User.create({
             username : req.body.username,
             email : req.body.email,
